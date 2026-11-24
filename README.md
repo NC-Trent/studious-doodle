@@ -1,55 +1,34 @@
-# studious-doodle
+# Studious Doodle
 
-A tiny beginner-friendly Python project scaffold.
+Practice flashcards from your terminal. Each card has a question and an answer. The deck lives on your computer and remembers when each card is due.
 
-## What this gives you
+## First session
 
-- A simple Python package (`app/`) with one function.
-- A test suite (`tests/`) using `pytest`.
-- A `Makefile` with common commands.
-- Basic linting/formatting setup (`ruff`).
+From the checkout, run these commands with Python 3.10 or newer.
 
-## Quick start
-
-1. Create and activate a virtual environment:
-
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   pip install -e .[dev]
-   ```
-
-3. Run checks:
-
-   ```bash
-   make test
-   make lint
-   make format
-   ```
-
-## Project layout
-
-```text
-.
-├── app/
-│   ├── __init__.py
-│   └── main.py
-├── tests/
-│   └── test_main.py
-├── docs/
-│   └── ONBOARDING.md
-├── Makefile
-├── pyproject.toml
-└── README.md
+```sh
+python -m app add "Which git command shows unstaged changes?" "git diff"
+python -m app review
+python -m app status
 ```
 
-## Next learning steps
+Recall the answer, press Enter to reveal it, then type a rating.
 
-- Add a second function in `app/main.py` and write tests first.
-- Learn basic Git workflow: branch, commit, push, pull request.
-- Add GitHub Actions CI once you're comfortable with local tooling.
+| Key | Effect |
+| --- | --- |
+| a | Practice the card again the next time you start a review. |
+| g | Schedule the card in 1, 2, 4, 8, 16, then 30 days on consecutive successes. |
+| q | End the session with the current card still due. Earlier ratings are saved. |
+
+A missed card restarts at the one-day interval on its next success. Review shows each due card once per session. Dates follow your local calendar.
+
+## Keep separate decks
+
+Cards are stored in `~/.studious-doodle.db`. Select another SQLite file with the global `--db` option. Use the same path each time you open that deck.
+
+```sh
+python -m app --db spanish.db add "Good morning" "Buenos días"
+python -m app --db spanish.db review
+```
+
+To use the shorter `study` command from any directory, install the project in an active virtual environment with `python -m pip install -e .`. For development, see the [newcomer guide](docs/ONBOARDING.md).

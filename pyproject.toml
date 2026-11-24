@@ -5,10 +5,13 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "studious-doodle"
 version = "0.1.0"
-description = "Beginner-friendly Python scaffold"
+description = "Offline flashcards with spaced review"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []
+
+[project.scripts]
+study = "app.__main__:main"
 
 [project.optional-dependencies]
 dev = [
